@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Surprise Gift 🎁</title>
+    <style>
+        body {
+            font-family: 'system-sans', cursive;
+            text-align: center;
+            background-color: hsl(312, 73%, 75%);
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            overflow-x: hidden;
+            animation: fadeIn 2s ease-in-out;
+        }
+        .container {
+            margin-top: 10%;
+        }
+        h1 {
+            color: #ff7b00;
+            font-size: 40px;
+        }
+        .gift-box {
+            font-size: 100px;
+            cursor: pointer;
+            animation: bounce 1s infinite alternate;
+        }
+        p {
+            font-size: 20px;
+            color: #555;
+        }
+        #giftResult {
+            display: none;
+            font-size: 28px;
+            color: hsla(281, 87%, 48%, 0.871);
+            margin-top: 20px;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes bounce {
+            from { transform: translateY(0); }
+            to { transform: translateY(-10px); }
+        }
+    </style>
+</head>
+<body>
+
+    <audio id="happyMusic" autoplay loop>
+        <source src="15SECONDS_2019-10-13_-_The_Biggest_Smile_-_David_Fesliyan.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="container">
+        <h1>YAY! You Forgave Me! 🥰🎉</h1>
+        <p>Click the gift box to see what you get! 🎁</p>
+        <div class="gift-box" onclick="revealGift()">🎁</div>
+        <p id="giftResult"></p>
+    </div>
+
+    <script>
+        function revealGift() {
+            const gifts = [
+                "A Late-Night Deep Talk & Vent Session 🌙☕",
+                "A giant chocolate stash 🍫",
+                "A Personalized Spotify Playlist 🎵💖" ,
+                "A Surprise Instagram Post 📸💬" ,
+                "A ‘Good Morning’ & ‘Good Night’ Text Week Streak ☀️🌙" ,
+                "Your Favorite Home-Cooked Meal! 🍛👩‍🍳",
+                "One wish, no limits! ✨"
+            ];
+            const randomGift = gifts[Math.floor(Math.random() * gifts.length)];
+            document.getElementById("giftResult").innerText = `You got: ${randomGift}`;
+            document.getElementById("giftResult").style.display = "block";
+            document.getElementById("happyMusic").play();
+            confetti();
+        }
+
+        function confetti() {
+            for (let i = 0; i < 100; i++) {
+                let confettiPiece = document.createElement("div");
+                confettiPiece.style.position = "fixed";
+                confettiPiece.style.width = "10px";
+                confettiPiece.style.height = "10px";
+                confettiPiece.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+                confettiPiece.style.left = Math.random() * window.innerWidth + "px";
+                confettiPiece.style.top = Math.random() * window.innerHeight + "px";
+                confettiPiece.style.opacity = "1";
+                confettiPiece.style.transition = "opacity 2s, transform 2s";
+                document.body.appendChild(confettiPiece);
+                setTimeout(() => {
+                    confettiPiece.style.opacity = "0";
+                    confettiPiece.style.transform = "translateY(100px)";
+                    setTimeout(() => document.body.removeChild(confettiPiece), 2000);
+                }, 100);
+            }
+        }
+    </script>
+</body>
+</html>

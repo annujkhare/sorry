@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Special One, I'm Sorry 😭</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            background-color: #ffe6e6;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            transition: background 1s, color 1s;
+        }
+        h1 {
+            color: #d62828;
+            font-size: 40px;
+            animation: fadeIn 2s ease-in-out;
+        }
+        #typing {
+            font-size: 22px;
+            color: #555;
+            min-height: 40px;
+        }
+        .emoji {
+            font-size: 80px;
+            animation: shake 1s infinite alternate;
+        }
+        .button-group {
+            margin-top: 20px;
+        }
+        button {
+            background-color: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            font-size: 20px;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: 0.3s;
+            margin: 10px;
+        }
+        button:hover {
+            background-color: #d62828;
+        }
+        .no-btn {
+            background-color: #333;
+        }
+        .no-btn:hover {
+            background-color: #000;
+        }
+        .progress-container {
+            width: 50%;
+            background-color: #ddd;
+            border-radius: 20px;
+            overflow: hidden;
+            margin: 20px auto;
+            display: none;
+        }
+        .progress-bar {
+            height: 30px;
+            width: 0%;
+            background-color: red;
+            text-align: center;
+            line-height: 30px;
+            color: white;
+            font-weight: bold;
+        }
+        #finalMessage {
+            display: none;
+            font-size: 22px;
+            color: #ff5555;
+        }
+        #restoreFriendship {
+            display: none;
+            background-color: #ffcc00;
+            padding: 10px 20px;
+            font-size: 18px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        #restoreFriendship:hover {
+            background-color: #ffaa00;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes shake {
+            from { transform: translateX(-5px); }
+            to { transform: translateX(5px); }
+        }
+    </style>
+</head>
+<body>
+
+    <audio id="sadMusic">
+        <source src="https://www.fesliyanstudios.com/play-mp3/387" type="audio/mpeg">
+    </audio>
+
+    <div class="container">
+        <h1>Special One, I'm Really Sorry 😢</h1>
+        <p id="typing"></p>
+        <div class="emoji">😭</div>
+
+        <div class="button-group">
+            <button onclick="forgiveMe()">Yes, I forgive you ❤️</button>
+            <button class="no-btn" onclick="confirmDeletion()">No! Never. 😠</button>
+        </div>
+
+        <div class="progress-container" id="progressContainer">
+            <div class="progress-bar" id="progressBar">0%</div>
+        </div>
+
+        <p id="finalMessage"></p>
+        <button id="restoreFriendship" onclick="restoreFriendship()">Restore Friendship? 😭💖</button>
+        <p id="redirectMessage" style="display:none; font-size:20px; color:#28a745;"></p>
+
+    </div>
+
+    <script>
+        // Typewriter effect
+        const message = "I know I made a mistake, Special One... and it’s been too long. I miss you and your amazing food. Please forgive me? 🥺💔";
+        let index = 0;
+
+        function typeWriter() {
+            if (index < message.length) {
+                document.getElementById("typing").innerHTML += message.charAt(index);
+                index++;
+                setTimeout(typeWriter, 50);
+            }
+        }
+        typeWriter();
+
+        function forgiveMe() {
+            window.location.href = "gift.html"; // Redirect to gift page
+        }
+
+        function confirmDeletion() {
+            let confirmation = confirm("Are you REALLY sure you want to delete our friendship forever? 💔😭");
+            if (confirmation) {
+                finalConfirmation();
+            }
+        }
+
+        function finalConfirmation() {
+            let finalCheck = confirm("This is your LAST CHANCE! Deleting will be PERMANENT. Continue?");
+            if (finalCheck) {
+                startDeletion();
+            }
+        }
+
+        function startDeletion() {
+            document.querySelector("h1").innerText = "Special One, Nooo! 💔😭";
+            document.querySelector(".emoji").innerText = "💔";
+            document.body.style.backgroundColor = "#222";
+            document.body.style.color = "#fff";
+            document.getElementById("sadMusic").play();
+
+            document.getElementById("progressContainer").style.display = "block";
+
+            let progress = 0;
+            let progressBar = document.getElementById("progressBar");
+            let finalMessage = document.getElementById("finalMessage");
+            let restoreBtn = document.getElementById("restoreFriendship");
+
+            let interval = setInterval(() => {
+                progress += Math.floor(Math.random() * 15) + 5; // Random progress 5-15%
+                if (progress > 100) progress = 100;
+
+                progressBar.style.width = progress + "%";
+                progressBar.innerText = progress + "%";
+
+                if (progress >= 100) {
+                    clearInterval(interval);
+
+                    finalMessage.innerHTML = `
+                        <p style="font-size:22px; color:#ff5555;">
+                            
+                        💔 Friendship Deletion Completed... But something feels wrong. </p>
+                        <p style="font-size:18px; color:#ff9999;">
+                        If I could delete every mistake I made, I would... But I can't.  
+                        The truth is, our friendship isn't something I ever want to erase.   
+                        No progress bar, no button, and no mistake should be enough to break us.  
+                        If you're reading this... Please know, I still care. I still miss you. And I still hope. 💕
+                        </p>
+                    `;
+                    finalMessage.style.display = "block";
+                    restoreBtn.style.display = "block";
+                }
+            }, 1000);
+        }
+
+        function restoreFriendship() {
+            document.body.style.backgroundColor = "#ffe6e6";
+            document.body.style.color = "#333";
+            document.querySelector("h1").innerText = "Wait... You came back?! 😭💖";
+            document.getElementById("finalMessage").innerHTML = `
+                <p style="font-size:22px; color:#28a745;">You didn't let go... Thank you.  
+                I promise to make it up to you! 🍕🍫🎉</p>`;
+            document.getElementById("restoreFriendship").style.display = "none";
+
+            // Show redirect message
+            document.getElementById("redirectMessage").innerText = "🎁 Hold on... A surprise gift is on its way! 🎁";
+            document.getElementById("redirectMessage").style.display = "block";
+
+            // Redirect after 3 seconds
+            setTimeout(() => {
+                window.location.href = "gift.html";
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
